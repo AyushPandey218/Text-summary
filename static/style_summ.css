@@ -327,6 +327,7 @@ button, textarea {
     top: 0.5rem; 
     left: 255px;;
     right: 100%;
+    display: flex;
   }
   
   .tooltip {
