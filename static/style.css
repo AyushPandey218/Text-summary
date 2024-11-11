@@ -206,61 +206,8 @@ textarea:focus {
     margin-top: 0.25rem;
 }
 
-/* Add smooth transitions */
 button, textarea {
     transition: all 0.2s ease-in-out;
 }
 
 
-#loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
-.load {
-    height: 300px;
-    width: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  span {
-    height: 30px;
-    width: 30px;
-    border-radius: 100%;
-    background: #4361ee;
-    margin: 10px;
-    position: relative;
-  }
-.one, .two, .three, .four {
-    animation: ani 2s linear infinite;
-  }
-  
-  .two {
-        animation-delay: 0.3s;
-  }
-  
-  .three {
-        animation-delay: 0.6s;
-  }
-  
-  .four {
-        animation-delay: 0.9s;
-  }
-  
-  @keyframes ani {
-    20% {top: 0px;}
-    30% {top: -15px;}
-    50% {top: -45px;}
-    70% {top: 15px;}
-    80% {top: 0px;}
-  }
