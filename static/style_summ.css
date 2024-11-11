@@ -291,36 +291,3 @@ button, textarea {
     animation: fadeIn 0.3s ease-out;
 }
 
-.copy-button {
-    margin-left: 57%;
-    padding: 8px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #ffffff;
-    color: #4b5563;
-  }
-  
-  .copy-button:hover {
-    background-color: #ffcfed;
-  }
-  
-  .copy-button.copied {
-    background-color: #dcfce7;
-    color: #7dd6ff;
-  }
-  
-  .copy-button svg {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .copy-button:focus {
-    outline: 2px solid #090de7;
-    outline-offset: 2px;
-  }
-  
