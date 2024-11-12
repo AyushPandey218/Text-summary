@@ -58,6 +58,7 @@
         <div class="input-card">
             <div class="textarea-wrapper">
                 <textarea id="myTextarea" name="rawtext" class="form-control", rows=3 placeholder="Enter your text here..."></textarea>
+                <div id="language-detection" class="language-detection">Detected Language: <span id="detected-language">None</span></div>
                 <div class="button-group">
                     <button id="summarize-button" type="submit" class="summarize-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -142,6 +143,43 @@ async function displayRandomQuote() {
 }
 
 document.getElementById("loading-screen").addEventListener("transitionstart", displayRandomQuote);
+
+
+        const detectedLangDisplay = document.getElementById('detected-language');
+
+        // Debounce function to limit API calls while typing
+        function debounce(func, delay) {
+            let debounceTimer;
+            return function() {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, arguments), delay);
+            };
+        }
+
+        async function detectLanguage() {
+            const text = textarea.value.trim();
+            if (text.length > 0) {
+                try {
+                    const response = await fetch("/detect_language", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ rawtext: text })
+                    });
+                    const data = await response.json();
+                    detectedLangDisplay.textContent = data.detected_lang || "Unknown";
+                } catch (error) {
+                    console.error("Error detecting language:", error);
+                    detectedLangDisplay.textContent = "Error";
+                }
+            } else {
+                detectedLangDisplay.textContent = "None";
+            }
+        }
+
+        // Call detectLanguage function with a delay while typing
+        textarea.addEventListener("input", debounce(detectLanguage, 500));
       </script>
 </body>
 </html>
