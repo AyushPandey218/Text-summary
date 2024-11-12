@@ -33,75 +33,6 @@ body {
     color: #4B5563;
 }
 
-.input-card {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.textarea-wrapper {
-    position: relative;
-}
-
-textarea {
-    width: 100%;
-    min-height: 200px;
-    padding: 1rem;
-    border: 1px solid #E5E7EB;
-    border-radius: 0.75rem;
-    outline: none;
-    resize: none;
-    font-family: inherit;
-    font-size: 1rem;
-    line-height: 1.5;
-}
-
-textarea:focus {
-    border-color: #3B82F6;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-}
-
-.button-group {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    display: flex;
-    gap: 0.5rem;
-}
-
-.upload-btn {
-    padding: 0.5rem;
-    background: #F3F4F6;
-    border: none;
-    border-radius: 0.5rem;
-    color: #4B5563;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.upload-btn:hover {
-    background: #E5E7EB;
-}
-
-.summarize-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: #2563EB;
-    border: none;
-    border-radius: 0.5rem;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.summarize-btn:hover {
-    background: #1D4ED8;
-}
-
 .comparison-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -296,12 +227,13 @@ button, textarea {
 
 
 .translation-controls{
-    margin-bottom: 10px;
     display: flex;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .translatebtn {
-    
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -314,17 +246,29 @@ button, textarea {
     transition: background-color 0.2s;
     grid-row: 1;
     margin-bottom: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .button-trans{
 display: grid;
   grid-template-rows: auto auto;
   justify-content: center;
+  margin-left: 8px;
 }
 
 .Revertbtn{
     border: none;
     grid-row: 2;
     background: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     
+}
+
+.langselect{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
