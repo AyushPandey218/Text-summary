@@ -295,3 +295,36 @@ button, textarea {
 }
 
 
+.translation-controls{
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.translatebtn {
+    
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #2563EB;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    grid-row: 1;
+    margin-bottom: 10px;
+}
+
+.button-trans{
+display: grid;
+  grid-template-rows: auto auto;
+  justify-content: center;
+}
+
+.Revertbtn{
+    border: none;
+    grid-row: 2;
+    background: none;
+    
+}

@@ -58,7 +58,6 @@
         <div class="input-card">
             <div class="textarea-wrapper">
                 <textarea id="myTextarea" name="rawtext" class="form-control", rows=3 placeholder="Enter your text here..."></textarea>
-                <div id="language-detection" class="language-detection">Detected Language: <span id="detected-language">None</span></div>
                 <div class="button-group">
                     <button id="summarize-button" type="submit" class="summarize-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -66,8 +65,12 @@
                         </svg>
                         Summarize
                     </button>
+                
+                
                 </div>
+                
             </div>
+            <div id="language-detection" class="language-detection">Detected Language: <span id="detected-language">None</span></div>
         </div>
 
         <div class="results-grid">
