@@ -32,40 +32,43 @@
                 </div>
                 <div class="word-count">
                     <span id="summary-count">{{len_summary}}</span> words
-
-                    <div class="translation-controls">
-                        <select id="languageSelect">
-                            <option value="" disabled selected>Select a language</option>
-                            <option value="en">English</option>
-                            <option value="es">Spanish</option>
-                            <option value="fr">French</option>
-                            <option value="de">German</option>
-                            <option value="it">Italian</option>
-                            <option value="pt">Portuguese</option>
-                            <option value="ru">Russian</option>
-                            <option value="ja">Japanese</option>
-                            <option value="ko">Korean</option>
-                            <option value="zh">Chinese</option>
-                            <option value="hi">Hindi</option>
-                        </select>
-                        <button id="translateButton" class="btn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M12 2L2 22l20-10-10-10zM12 22l-3-3"/>
-                            </svg>
-                            Translate
-                        </button>
-                        <button id="revertButton" class="btn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M10 19l7-7-7-7M17 12H3"/>
-                            </svg>
-                            Revert
-                        </button>
-                    </div>
-    
                 </div>
             </div>
         </div>
+        <div class="results-grid">
+            
+            <div class="result-card">
+                <div class="translation-controls">
+                    <select id="languageSelect">
+                        <option value="" disabled selected>Select a language</option>
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="it">Italian</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="ru">Russian</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="zh">Chinese</option>
+                        <option value="hi">Hindi</option>
+                    </select>
+                    <button id="translateButton" class="btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 2L2 22l20-10-10-10zM12 22l-3-3"/>
+                        </svg>
+                        Translate
+                    </button>
+                    <button id="revertButton" class="btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M10 19l7-7-7-7M17 12H3"/>
+                        </svg>
+                        Revert
+                    </button>
+                </div>
 
+            </div>
+        </div>
         <nav class="taskbar">
             <div class="taskbar-content">
                 <button class="taskbar-btn" onclick="window.location.href='/'">
