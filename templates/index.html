@@ -106,6 +106,8 @@
         </div>
     </nav>
     <script>
+
+        /*word and charcter count */
         document.getElementById("summarize-button").addEventListener("click", function() {
     document.getElementById("loading-screen").style.display = "flex";
 });
@@ -125,7 +127,7 @@
   });
 
 
-
+/*loading quote */
   const quoteElement = document.getElementById("loading-quote");
 
 
@@ -145,6 +147,8 @@ async function displayRandomQuote() {
 document.getElementById("loading-screen").addEventListener("transitionstart", displayRandomQuote);
 
 
+
+/*lang-detection*/
         const detectedLangDisplay = document.getElementById('detected-language');
 
         // Debounce function to limit API calls while typing
