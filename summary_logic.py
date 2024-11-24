@@ -13,7 +13,7 @@ def translate_text(text, dest_lang='en'):
     translated_text = translator.translate(text, src=detected_lang, dest=dest_lang).text
     return translated_text, detected_lang
 
-def summarizer(rawdocs):
+def summarizer(rawdocs, summary_ratio=0.3, max_sentences=None):
     # Step 1: Translate input text to English
     rawdocs_english, original_lang = translate_text(rawdocs, 'en')
 
@@ -33,9 +33,16 @@ def summarizer(rawdocs):
 
     sent_tokens = [sent for sent in doc.sents]
     sent_scores = {sent: sum(word_freq.get(word.text, 0) for word in sent) for sent in sent_tokens}
-    select_len = int(len(sent_tokens) * 0.3)
+
+    # Calculate the number of sentences for the summary
+    if max_sentences:
+        select_len = min(len(sent_tokens), max_sentences)
+    else:
+        select_len = max(1, int(len(sent_tokens) * summary_ratio))  # Ensure at least 1 sentence
+
     summary = ' '.join([sent.text for sent in nlargest(select_len, sent_scores, key=sent_scores.get)])
 
     # Step 3: Translate summary back to the original language
     summary_translated = translator.translate(summary, src='en', dest=original_lang).text
+
     return summary_translated, rawdocs, len(rawdocs.split(' ')), len(summary_translated.split(' '))
