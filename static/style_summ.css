@@ -47,10 +47,9 @@ body {
 }
 
 .results-grid {
-    width:100%;
+    width: 100%;
     display: flex;
     justify-content: center;
-    grid-template-columns: 1fr;
     gap: 1.5rem;
 }
 
@@ -68,9 +67,9 @@ body {
 }
 
 .result-card h2 {
-    width:100%;
-  display: flex;
-  justify-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
     font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -85,9 +84,9 @@ body {
 }
 
 .stats-grid {
-    width:100%;
+    width: 100%;
     display: flex;
-    justify-content: center
+    justify-content: center;
 }
 
 .stat-box {
@@ -168,7 +167,7 @@ body {
 }
 
 .taskbar {
-    border-radius:50px ;
+    border-radius: 50px;
     position: fixed;
     bottom: 1.5%;
     left: 0;
@@ -210,27 +209,49 @@ body {
     margin-top: 0.25rem;
 }
 
-/* Add smooth transitions */
-button, textarea {
+button,
+textarea {
     transition: all 0.2s ease-in-out;
 }
 
-/* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .text-card {
     animation: fadeIn 0.3s ease-out;
 }
 
-
-.translation-controls{
+.translation-controls {
     display: flex;
-  border-radius: 5px;
-  font-size: 16px;
-  margin-bottom: 10px;
+    flex-direction: column; /* Stack dropdowns vertically */
+    gap: 10px; /* Space between dropdowns */
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.langselect {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.button-trans {
+    display: flex; /* Buttons side by side */
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+    margin-top: 10px; /* Space above buttons */
 }
 
 .translatebtn {
@@ -244,31 +265,20 @@ button, textarea {
     color: white;
     cursor: pointer;
     transition: background-color 0.2s;
-    grid-row: 1;
-    margin-bottom: 10px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.button-trans{
-display: grid;
-  grid-template-rows: auto auto;
-  justify-content: center;
-  margin-left: 8px;
-}
-
-.Revertbtn{
+.Revertbtn {
     border: none;
-    grid-row: 2;
-    background: none;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    
-}
-
-.langselect{
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    background: #E5E7EB;
+    color: #4B5563;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
+    cursor: pointer;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s;
+}
+
+.Revertbtn:hover {
+    background: #D1D5DB; /* Slightly darker on hover */
 }

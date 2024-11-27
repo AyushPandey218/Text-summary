@@ -17,24 +17,22 @@
         <div class="comparison-grid">
             <div class="text-card">
                 <h2>Original Text</h2>
-                <div class="text-content" id="original-text">{{original_txt}}
-                </div>
+                <div class="text-content" id="original-text">{{original_txt}}</div>
                 <div class="word-count">
-                    <span id="original-count">{{len_orig_txt }}</span> words
+                    <span id="original-count">{{len_orig_txt}}</span> words
                 </div>
             </div>
 
             <div class="text-card">
                 <h2>Summarized Text</h2>
-                <div class="text-content" id="summary-text">{{summary}}
-                </div>
+                <div class="text-content" id="summary-text">{{summary}}</div>
                 <div class="word-count">
                     <span id="summary-count">{{len_summary}}</span> words
                 </div>
             </div>
         </div>
+
         <div class="results-grid">
-            
             <div class="result-card">
                 <div class="translation-controls">
                     <select id="languageSelect" class="langselect">
@@ -51,19 +49,22 @@
                         <option value="zh">Chinese</option>
                         <option value="hi">Hindi</option>
                     </select>
-                 <div class="button-trans">
-                    <button id="translateButton" class="translatebtn">
-                        Translate
-                    </button>
-                    <button id="revertButton" class="Revertbtn">
-                        Revert
-                    </button>
-                 </div>
-                    
-                </div>
 
+                    <select id="translateScope" class="langselect">
+                        <option value="" disabled selected>Select Translation Scope</option>
+                        <option value="summary">Summarized Text Only</option>
+                        <option value="original">Original Text Only</option>
+                        <option value="all">Translate All</option>
+                    </select>
+
+                    <div class="button-trans">
+                        <button id="translateButton" class="translatebtn">Translate</button>
+                        <button id="revertButton" class="Revertbtn">Revert</button>
+                    </div>
+                </div>
             </div>
         </div>
+
         <nav class="taskbar">
             <div class="taskbar-content">
                 <button class="taskbar-btn" onclick="window.location.href='/'">
@@ -83,48 +84,63 @@
                 </button>
             </div>
         </nav>
-    
-    
+
         <script>
-       const originalTextElement = document.getElementById('original-text');
-    const summaryTextElement = document.getElementById('summary-text');
-    const originalWordCount = document.getElementById('original-count');
-    const summaryWordCount = document.getElementById('summary-count');
-    let originalTextBackup = originalTextElement.innerText;
-    let summaryTextBackup = summaryTextElement.innerText;
+            const originalTextElement = document.getElementById('original-text');
+            const summaryTextElement = document.getElementById('summary-text');
+            const originalWordCount = document.getElementById('original-count');
+            const summaryWordCount = document.getElementById('summary-count');
+            let originalTextBackup = originalTextElement.innerText;
+            let summaryTextBackup = summaryTextElement.innerText;
 
-    // Translate button functionality
-    document.getElementById('translateButton').addEventListener('click', async () => {
-        const targetLang = document.getElementById('languageSelect').value;
+            // Translate button functionality
+            document.getElementById('translateButton').addEventListener('click', async () => {
+                const targetLang = document.getElementById('languageSelect').value;
+                const translateScope = document.getElementById('translateScope').value;
 
-        try {
-            // Translate Original Text
-            const originalResponse = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURIComponent(originalTextBackup)}`);
-            const originalData = await originalResponse.json();
-            const translatedOriginalText = originalData[0].map(x => x[0]).join('');
-            originalTextElement.innerText = translatedOriginalText;
-            originalWordCount.innerText = translatedOriginalText.split(/\s+/).length;
+                if (!targetLang || !translateScope) {
+                    alert('Please select a language and translation scope.');
+                    return;
+                }
 
-            // Translate Summarized Text
-            const summaryResponse = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURIComponent(summaryTextBackup)}`);
-            const summaryData = await summaryResponse.json();
-            const translatedSummaryText = summaryData[0].map(x => x[0]).join('');
-            summaryTextElement.innerText = translatedSummaryText;
-            summaryWordCount.innerText = translatedSummaryText.split(/\s+/).length;
+                try {
+                    if (translateScope === 'original' || translateScope === 'all') {
+                        const originalResponse = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURIComponent(originalTextBackup)}`);
+                        const originalData = await originalResponse.json();
+                        const translatedOriginalText = originalData[0].map(x => x[0]).join('');
+                        originalTextElement.innerText = translatedOriginalText;
+                        originalWordCount.innerText = translatedOriginalText.split(/\s+/).length;
+                    }
 
-        } catch (error) {
-            console.error('Translation error:', error);
-            alert('Translation failed. Please try again.');
-        }
-    });
+                    if (translateScope === 'summary' || translateScope === 'all') {
+                        const summaryResponse = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURIComponent(summaryTextBackup)}`);
+                        const summaryData = await summaryResponse.json();
+                        const translatedSummaryText = summaryData[0].map(x => x[0]).join('');
+                        summaryTextElement.innerText = translatedSummaryText;
+                        summaryWordCount.innerText = translatedSummaryText.split(/\s+/).length;
+                    }
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    alert('Translation failed. Please try again.');
+                }
+            });
 
-    // Revert button functionality
-    document.getElementById('revertButton').addEventListener('click', () => {
-        originalTextElement.innerText = originalTextBackup;
-        summaryTextElement.innerText = summaryTextBackup;
-        originalWordCount.innerText = originalTextBackup.split(/\s+/).length;
-        summaryWordCount.innerText = summaryTextBackup.split(/\s+/).length;
-    });
-</script>
+            // Revert button functionality
+            document.getElementById('revertButton').addEventListener('click', () => {
+                // Reset text content to original backups
+                originalTextElement.innerText = originalTextBackup;
+                summaryTextElement.innerText = summaryTextBackup;
+
+                // Update word counts
+                originalWordCount.innerText = originalTextBackup.split(/\s+/).length;
+                summaryWordCount.innerText = summaryTextBackup.split(/\s+/).length;
+
+                // Reset dropdown selections
+                document.getElementById('languageSelect').selectedIndex = 0; // Reset language dropdown
+                document.getElementById('translateScope').selectedIndex = 0; // Reset translation scope dropdown
+            });
+        </script>
+    </div>
 </body>
 </html>
+
