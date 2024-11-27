@@ -85,6 +85,7 @@
                 </svg>
                 <span>Home</span>
             </button>
+            <div class="spacer"></div>
             <button class="taskbar-btn" onclick="window.location.href='/about'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -107,6 +108,57 @@
         slider.addEventListener('input', function () {
             const sliderRect = slider.getBoundingClientRect();
             const thumbPosition = ((this.value - this.min) / (this.max - this.min)) * sliderRect.width;
+
+
+        // Handle word and character count
+        const textarea = document.getElementById('myTextarea');
+        const wordCountDisplay = document.getElementById('wordCount');
+        const charCountDisplay = document.getElementById('charCount');
+
+        textarea.addEventListener('input', () => {
+        const wordCount = textarea.value.trim().split(/\s+/).length;
+        wordCountDisplay.textContent = `Word Count: ${wordCount}`;
+
+        const charCount = textarea.value.length;
+        charCountDisplay.textContent = `Character Count: ${charCount}`;
+        });
+
+
+
+        // Language detection
+        const detectedLangDisplay = document.getElementById('detected-language');
+
+        function debounce(func, delay) {
+            let debounceTimer;
+            return function() {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, arguments), delay);
+            };
+        }
+
+        async function detectLanguage() {
+            const text = textarea.value.trim();
+            if (text.length > 0) {
+                try {
+                    const response = await fetch("/detect_language", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ rawtext: text })
+                    });
+                    const data = await response.json();
+                    detectedLangDisplay.textContent = data.detected_lang || "Unknown";
+                } catch (error) {
+                    console.error("Error detecting language:", error);
+                    detectedLangDisplay.textContent = "Error";
+                }
+            } else {
+                detectedLangDisplay.textContent = "None";
+            }
+        }
+
+        textarea.addEventListener("input", debounce(detectLanguage, 500));
 
             // Update tooltip content and position
             if (this.value == 0) {

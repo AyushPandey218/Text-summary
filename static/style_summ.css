@@ -170,24 +170,46 @@ body {
     border-radius: 50px;
     position: fixed;
     bottom: 1.5%;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(8px);
     border-top: 1px solid #E5E7EB;
     padding: 0.5rem 1rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
-.taskbar-content {
-    max-width: 72rem;
-    margin: 0 auto;
+    width: 90%;
+    max-width: 768px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+  }
+  
+  .taskbar-content {
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
     align-items: center;
-}
-
-.taskbar-btn {
+  }
+  
+  @media (max-width: 768px) {
+    .taskbar-content {
+      gap: 1rem; /* Smaller gap on smaller devices */
+    }
+    .taskbar-btn:first-child {
+      margin-right: 1.5rem; /* Adjust as needed */
+    }
+  }
+  
+  .taskbar-content .spacer {
+    flex-grow: 2; /* This pushes Home and About apart */
+  }
+  
+  .spacer {
+    width: 50px;
+  }
+  
+  .taskbar-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -198,21 +220,21 @@ body {
     color: #4B5563;
     cursor: pointer;
     transition: background-color 0.2s;
-}
-
-.taskbar-btn:hover {
+  }
+  
+  .taskbar-btn:hover {
     background: #F3F4F6;
-}
-
-.taskbar-btn span {
+  }
+  
+  .taskbar-btn span {
     font-size: 0.75rem;
     margin-top: 0.25rem;
-}
-
-button,
-textarea {
+  }
+  
+  button,
+  textarea {
     transition: all 0.2s ease-in-out;
-}
+  }
 
 @keyframes fadeIn {
     from {
